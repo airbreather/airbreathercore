@@ -10,7 +10,7 @@ public interface CustomConfiguration
     void Initialize(File configurationFile);
 
     // Gets the ItemConfiguration object that maps arbitrary internal IDs to Item objects that this mod uses.
-    ItemConfiguration GetItemConfiguration();
+    IItemConfiguration GetItemConfiguration();
 
     // Gets the RecipeConfiguration object that is used to fetch the recipes configured for this mod.
     RecipeConfiguration GetRecipeConfiguration();
