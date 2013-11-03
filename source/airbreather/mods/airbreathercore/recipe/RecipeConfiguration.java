@@ -1,6 +1,4 @@
-package airbreather.mods.airbreathercore;
-
-import airbreather.mods.airbreathercore.Recipe;
+package airbreather.mods.airbreathercore.recipe;
 
 // An interface for a configuration that holds Recipes configured for this mod.
 public interface RecipeConfiguration

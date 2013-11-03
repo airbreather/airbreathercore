@@ -1,6 +1,4 @@
-package airbreather.mods.airbreathercore;
-
-import airbreather.mods.airbreathercore.RecipeType;
+package airbreather.mods.airbreathercore.recipe;
 
 // Base class for all recipes that can be registered using the RecipeRegistrar.
 // The RecipeType indicates what kind of a recipe this is (Crafting / Smelting).

@@ -1,9 +1,7 @@
-package airbreather.mods.airbreathercore;
-
-import airbreather.mods.airbreathercore.Recipe;
+package airbreather.mods.airbreathercore.recipe;
 
 // An interface for something that registers recipes.
-public interface IRecipeRegistrar
+public interface RecipeRegistrar
 {
     // register the recipes.
     void RegisterRecipes(Iterable<Recipe> recipes);

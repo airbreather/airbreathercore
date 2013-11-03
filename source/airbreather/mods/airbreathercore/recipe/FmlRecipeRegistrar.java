@@ -1,15 +1,12 @@
-package airbreather.mods.airbreathercore;
+package airbreather.mods.airbreathercore.recipe;
 
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
-import airbreather.mods.airbreathercore.Recipe;
-import airbreather.mods.airbreathercore.CraftingRecipe;
-import airbreather.mods.airbreathercore.SmeltingRecipe;
 
-// Implements IRecipeRegistrar using the FML GameRegistry.
-public final class RecipeRegistrar implements IRecipeRegistrar
+// Implements RecipeRegistrar using the FML GameRegistry.
+public final class FmlRecipeRegistrar implements RecipeRegistrar
 {
-    // register the recipes for this mod.
+    // register the given recipes with the underlying system.
     public void RegisterRecipes(Iterable<Recipe> recipes)
     {
         for (Recipe recipe : recipes)

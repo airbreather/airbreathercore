@@ -1,9 +1,7 @@
-package airbreather.mods.airbreathercore;
+package airbreather.mods.airbreathercore.recipe;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import airbreather.mods.airbreathercore.Recipe;
-import airbreather.mods.airbreathercore.RecipeType;
 
 // A smelting recipe -- Item goes in, ItemStack comes out, yielding some experience.
 public final class SmeltingRecipe extends Recipe

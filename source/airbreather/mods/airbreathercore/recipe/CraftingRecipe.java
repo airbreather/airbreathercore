@@ -1,8 +1,6 @@
-package airbreather.mods.airbreathercore;
+package airbreather.mods.airbreathercore.recipe;
 
 import net.minecraft.item.ItemStack;
-import airbreather.mods.airbreathercore.Recipe;
-import airbreather.mods.airbreathercore.RecipeType;
 
 // A crafting recipe -- "inputs" come in, ItemStack comes out.
 public final class CraftingRecipe extends Recipe
