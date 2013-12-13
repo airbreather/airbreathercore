@@ -4,5 +4,5 @@ package airbreather.mods.airbreathercore.recipe;
 public interface RecipeRegistrar
 {
     // register the recipes.
-    void RegisterRecipes(Iterable<Recipe> recipes);
+    void RegisterRecipes(RecipeConfiguration recipeConfiguration);
 }

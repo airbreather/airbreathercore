@@ -17,9 +17,9 @@ public final class FmlRecipeRegistrar implements RecipeRegistrar
     }
 
     // register the given recipes with the underlying system.
-    public void RegisterRecipes(Iterable<Recipe> recipes)
+    public void RegisterRecipes(RecipeConfiguration recipeConfiguration)
     {
-        for (Recipe recipe : recipes)
+        for (Recipe recipe : recipeConfiguration.GetRecipes())
         {
             switch (recipe.GetRecipeType())
             {
