@@ -1,5 +1,6 @@
 package airbreather.mods.airbreathercore.recipe;
 
+import java.util.ArrayList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -46,12 +47,27 @@ public final class FmlRecipeRegistrar implements RecipeRegistrar
     {
         ShapedCraftingRecipe shapedCraftingRecipe = (ShapedCraftingRecipe)recipe;
 
-        Object[] inputs = shapedCraftingRecipe.GetInputs();
+        // Gotta convert ItemDefinition to their Item.
+        Object[] weakInputs = shapedCraftingRecipe.GetInputs();
+        ArrayList<Object> strongInputs = new ArrayList<Object>(weakInputs.length);
+        for (Object weakInput : weakInputs)
+        {
+            if (weakInput instanceof ItemDefinition)
+            {
+                ItemDefinition definition = (ItemDefinition)weakInput;
+                Item strongInput = itemRegistry.FetchItem(definition);
+                strongInputs.add(strongInput);
+            }
+            else
+            {
+                strongInputs.add(weakInput);
+            }
+        }
 
         RecipeResult result = shapedCraftingRecipe.GetResult();
         ItemStack resultItemStack = GetResultItemStack(result, itemRegistry);
 
-        GameRegistry.addRecipe(resultItemStack, inputs);
+        GameRegistry.addRecipe(resultItemStack, strongInputs.toArray());
     }
 
     private static ItemStack GetResultItemStack(RecipeResult result, ItemRegistry itemRegistry)

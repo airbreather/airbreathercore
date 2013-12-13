@@ -10,7 +10,7 @@ public class ItemRegistrarBase implements ItemRegistrar
         {
             ItemDefinition itemDefinition = configuration.GetItemDefinition(tag);
             Item item = this.CreateItem(itemDefinition);
-            registry.RegisterItem(itemDefinition, item);
+            registry.RegisterNewItem(itemDefinition, item);
         }
     }
 

@@ -7,5 +7,5 @@ public interface ItemConfiguration
     ItemDefinition GetItemDefinition(int tag);
 
     // Gets all the tags of new items.
-    Iterable<int> GetNewItemTags();
+    Iterable<Integer> GetNewItemTags();
 }
