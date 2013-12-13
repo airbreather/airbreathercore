@@ -32,12 +32,13 @@ public final class FmlRecipeRegistrar implements RecipeRegistrar
     {
         SmeltingRecipe smeltingRecipe = (SmeltingRecipe)recipe;
 
-        ItemDefinition input = smeltingRecipe.GetInput();
+        ItemDefinition inputDefinition = smeltingRecipe.GetInput();
+        Item input = itemRegistry.FetchItem(inputDefinition);
+        int inputID = input.itemID;
 
         RecipeResult result = smeltingRecipe.GetResult();
         ItemStack resultItemStack = GetResultItemStack(result, itemRegistry);
 
-        int inputID = input.GetItemID();
         float experience = smeltingRecipe.GetExperience();
 
         GameRegistry.addSmelting(inputID, resultItemStack, experience);
