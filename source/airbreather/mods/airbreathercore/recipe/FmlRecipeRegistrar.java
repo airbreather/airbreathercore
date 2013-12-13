@@ -27,8 +27,8 @@ public final class FmlRecipeRegistrar implements RecipeRegistrar
                     this.RegisterSmeltingRecipe(recipe);
                     break;
 
-                case Crafting:
-                    this.RegisterCraftingRecipe(recipe);
+                case ShapedCrafting:
+                    this.RegisterShapedCraftingRecipe(recipe);
                     break;
             }
         }
@@ -49,13 +49,13 @@ public final class FmlRecipeRegistrar implements RecipeRegistrar
         GameRegistry.addSmelting(inputID, resultItemStack, experience);
     }
 
-    private void RegisterCraftingRecipe(Recipe recipe)
+    private void RegisterShapedCraftingRecipe(Recipe recipe)
     {
-        CraftingRecipe craftingRecipe = (CraftingRecipe)recipe;
+        ShapedCraftingRecipe shapedCraftingRecipe = (ShapedCraftingRecipe)recipe;
 
-        Object[] inputs = craftingRecipe.GetInputs();
+        Object[] inputs = shapedCraftingRecipe.GetInputs();
 
-        RecipeResult result = craftingRecipe.GetResult();
+        RecipeResult result = shapedCraftingRecipe.GetResult();
         ItemStack resultItemStack = this.GetResultItemStack(result);
 
         GameRegistry.addRecipe(resultItemStack, inputs);
