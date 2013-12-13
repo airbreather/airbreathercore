@@ -13,12 +13,12 @@ public abstract class Recipe
         this.result = result;
     }
 
-    public RecipeType GetRecipeType()
+    public final RecipeType GetRecipeType()
     {
         return this.recipeType;
     }
 
-    public RecipeResult GetResult()
+    public final RecipeResult GetResult()
     {
         return this.result;
     }
