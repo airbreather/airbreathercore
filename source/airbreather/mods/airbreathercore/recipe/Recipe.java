@@ -5,14 +5,21 @@ package airbreather.mods.airbreathercore.recipe;
 public abstract class Recipe
 {
     private final RecipeType recipeType;
+    private final RecipeResult result;
 
-    protected Recipe(RecipeType recipeType)
+    protected Recipe(RecipeType recipeType, RecipeResult result)
     {
         this.recipeType = recipeType;
+        this.result = result;
     }
 
     public RecipeType GetRecipeType()
     {
         return this.recipeType;
+    }
+
+    public RecipeResult GetResult()
+    {
+        return this.result;
     }
 }

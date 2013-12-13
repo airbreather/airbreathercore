@@ -1,29 +1,21 @@
 package airbreather.mods.airbreathercore.recipe;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import airbreather.mods.airbreathercore.item.ItemDefinition;
 
 // A smelting recipe -- Item goes in, ItemStack comes out, yielding some experience.
 public final class SmeltingRecipe extends Recipe
 {
-    private final ItemStack result;
-    private final Item input;
+    private final ItemDefinition input;
     private final float experience;
 
-    public SmeltingRecipe(ItemStack result, Item input, float experience)
+    public SmeltingRecipe(RecipeResult result, ItemDefinition input, float experience)
     {
-        super(RecipeType.Smelting);
-        this.result = result;
+        super(RecipeType.Smelting, result);
         this.input = input;
         this.experience = experience;
     }
 
-    public ItemStack GetResult()
-    {
-        return this.result;
-    }
-
-    public Item GetInput()
+    public ItemDefinition GetInput()
     {
         return this.input;
     }

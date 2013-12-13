@@ -1,10 +1,8 @@
-package airbreather.mods.airbreathercore;
+package airbreather.mods.airbreathercore.item;
 
-import net.minecraft.item.Item;
-
-// An interface for a configuration that maps IDs (used internally) to Item objects.
+// An interface for a configuration that can be used to fetch the full ItemDefinition given just its tag.
 public interface ItemConfiguration
 {
-    // Gets the Item configured by a given id.
-    Item GetItem(int id);
+    // Gets the full ItemDefinition configured for a given tag.
+    ItemDefinition GetItemDefinition(Object tag);
 }
