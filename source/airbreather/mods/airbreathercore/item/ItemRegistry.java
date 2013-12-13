@@ -9,5 +9,5 @@ public interface ItemRegistry
     Item FetchItem(ItemDefinition itemDefinition);
 
     // Registers the given definition to map to the given Item.
-    void RegisterItem(ItemDefinition itemDefinition, Item item);
+    void RegisterNewItem(ItemDefinition itemDefinition, Item item);
 }

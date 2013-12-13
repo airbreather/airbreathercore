@@ -8,9 +8,11 @@ import airbreather.mods.airbreathercore.item.ItemConfiguration;
 import airbreather.mods.airbreathercore.recipe.EmptyRecipeConfiguration;
 import airbreather.mods.airbreathercore.recipe.RecipeConfiguration;
 
-public abstract class CustomConfigurationBase implements CustomConfiguration
+public class CustomConfigurationBase implements CustomConfiguration
 {
-    public abstract void Initialize(File configurationFile);
+    public void Initialize(File configurationFile)
+    {
+    }
 
     public ItemConfiguration GetItemConfiguration()
     {

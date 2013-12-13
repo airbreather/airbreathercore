@@ -9,39 +9,32 @@ import airbreather.mods.airbreathercore.item.ItemRegistry;
 // Implements RecipeRegistrar using the FML GameRegistry.
 public final class FmlRecipeRegistrar implements RecipeRegistrar
 {
-    private final ItemRegistry itemRegistry;
-
-    public FmlRecipeRegistrar(ItemRegistry itemRegistry)
-    {
-        this.itemRegistry = itemRegistry;
-    }
-
     // register the given recipes with the underlying system.
-    public void RegisterRecipes(RecipeConfiguration recipeConfiguration)
+    public void RegisterRecipes(RecipeConfiguration recipeConfiguration, ItemRegistry itemRegistry)
     {
         for (Recipe recipe : recipeConfiguration.GetRecipes())
         {
             switch (recipe.GetRecipeType())
             {
                 case Smelting:
-                    this.RegisterSmeltingRecipe(recipe);
+                    RegisterSmeltingRecipe(recipe, itemRegistry);
                     break;
 
                 case ShapedCrafting:
-                    this.RegisterShapedCraftingRecipe(recipe);
+                    RegisterShapedCraftingRecipe(recipe, itemRegistry);
                     break;
             }
         }
     }
 
-    private void RegisterSmeltingRecipe(Recipe recipe)
+    private static void RegisterSmeltingRecipe(Recipe recipe, ItemRegistry itemRegistry)
     {
         SmeltingRecipe smeltingRecipe = (SmeltingRecipe)recipe;
 
         ItemDefinition input = smeltingRecipe.GetInput();
 
         RecipeResult result = smeltingRecipe.GetResult();
-        ItemStack resultItemStack = this.GetResultItemStack(result);
+        ItemStack resultItemStack = GetResultItemStack(result, itemRegistry);
 
         int inputID = input.GetItemID();
         float experience = smeltingRecipe.GetExperience();
@@ -49,23 +42,23 @@ public final class FmlRecipeRegistrar implements RecipeRegistrar
         GameRegistry.addSmelting(inputID, resultItemStack, experience);
     }
 
-    private void RegisterShapedCraftingRecipe(Recipe recipe)
+    private static void RegisterShapedCraftingRecipe(Recipe recipe, ItemRegistry itemRegistry)
     {
         ShapedCraftingRecipe shapedCraftingRecipe = (ShapedCraftingRecipe)recipe;
 
         Object[] inputs = shapedCraftingRecipe.GetInputs();
 
         RecipeResult result = shapedCraftingRecipe.GetResult();
-        ItemStack resultItemStack = this.GetResultItemStack(result);
+        ItemStack resultItemStack = GetResultItemStack(result, itemRegistry);
 
         GameRegistry.addRecipe(resultItemStack, inputs);
     }
 
-    private ItemStack GetResultItemStack(RecipeResult result)
+    private static ItemStack GetResultItemStack(RecipeResult result, ItemRegistry itemRegistry)
     {
         ItemDefinition resultItemDefinition = result.GetItemDefinition();
 
-        Item resultItem = this.itemRegistry.FetchItem(resultItemDefinition);
+        Item resultItem = itemRegistry.FetchItem(resultItemDefinition);
         ItemStack resultItemStack = new ItemStack(resultItem);
         int requestedStackSize = Math.max(1, result.GetCount());
 

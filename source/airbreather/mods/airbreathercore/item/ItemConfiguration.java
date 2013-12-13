@@ -4,5 +4,8 @@ package airbreather.mods.airbreathercore.item;
 public interface ItemConfiguration
 {
     // Gets the full ItemDefinition configured for a given tag.
-    ItemDefinition GetItemDefinition(Object tag);
+    ItemDefinition GetItemDefinition(int tag);
+
+    // Gets all the tags of new items.
+    Iterable<int> GetNewItemTags();
 }

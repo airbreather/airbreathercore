@@ -2,12 +2,12 @@ package airbreather.mods.airbreathercore.item;
 
 public final class ItemDefinition
 {
-    private final Object tag;
+    private final int tag;
     private final int itemID;
     private final String modID;
     private final String itemName;
 
-    public ItemDefinition(Object tag, int itemID, String modID, String itemName)
+    public ItemDefinition(int tag, int itemID, String modID, String itemName)
     {
         this.tag = tag;
         this.itemID = itemID;
@@ -15,7 +15,7 @@ public final class ItemDefinition
         this.itemName = itemName;
     }
 
-    public Object GetTag()
+    public int GetTag()
     {
         return this.tag;
     }
