@@ -1,7 +1,7 @@
 package airbreather.mods.airbreathercore.event;
 
 import java.util.ArrayList;
-import net.minecraftforge.event.IEventListener;
+import cpw.mods.fml.common.eventhandler.IEventListener;
 
 public final class EmptyEventConfiguration implements EventConfiguration
 {

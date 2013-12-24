@@ -1,6 +1,6 @@
 package airbreather.mods.airbreathercore.event;
 
-import net.minecraftforge.event.IEventListener;
+import cpw.mods.fml.common.eventhandler.IEventListener;
 
 // Subscribes events.
 public interface EventSubscriber

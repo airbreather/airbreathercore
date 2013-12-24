@@ -17,11 +17,10 @@ public class ItemRegistrarBase implements ItemRegistrar
 
     protected Item CreateItemCore(ItemDefinition definition)
     {
-        FMLLog.severe("%d is not a recognized item tag (claims to be for %s:%s, id=%d).  THIS IS A PROGRAMMING ERROR.",
+        FMLLog.severe("%d is not a recognized item tag (claims to be for %s:%s).  THIS IS A PROGRAMMING ERROR.",
                       definition.GetTag(),
                       definition.GetModID(),
-                      definition.GetItemName(),
-                      definition.GetItemID());
+                      definition.GetItemName());
         return null;
     }
 

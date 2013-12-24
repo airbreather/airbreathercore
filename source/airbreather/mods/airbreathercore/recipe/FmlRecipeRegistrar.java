@@ -34,14 +34,13 @@ public final class FmlRecipeRegistrar implements RecipeRegistrar
 
         ItemDefinition inputDefinition = smeltingRecipe.GetInput();
         Item input = itemRegistry.FetchItem(inputDefinition);
-        int inputID = input.itemID;
 
         RecipeResult result = smeltingRecipe.GetResult();
         ItemStack resultItemStack = GetResultItemStack(result, itemRegistry);
 
         float experience = smeltingRecipe.GetExperience();
 
-        GameRegistry.addSmelting(inputID, resultItemStack, experience);
+        GameRegistry.addSmelting(input, resultItemStack, experience);
     }
 
     private static void RegisterShapedCraftingRecipe(Recipe recipe, ItemRegistry itemRegistry)

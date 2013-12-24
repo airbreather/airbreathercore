@@ -10,13 +10,6 @@ public final class FmlItemRegistry implements ItemRegistry
     public Item FetchItem(ItemDefinition itemDefinition)
     {
         String modID = itemDefinition.GetModID();
-        if ("Minecraft".equals(modID))
-        {
-            // Not sure how this is going to work in 1.7.
-            int itemID = itemDefinition.GetItemID();
-            return Item.itemsList[itemID];
-        }
-
         String itemName = itemDefinition.GetItemName();
         return GameRegistry.findItem(modID, itemName);
     }

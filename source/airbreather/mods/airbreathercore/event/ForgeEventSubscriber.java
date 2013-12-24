@@ -2,9 +2,9 @@ package airbreather.mods.airbreathercore.event;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.eventhandler.IEventListener;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.IEventListener;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
 // This whole thing is a thin wrapper around the standard Forge event handling system
@@ -35,7 +35,7 @@ public final class ForgeEventSubscriber implements EventSubscriber
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void OnLivingDropsEvent(LivingDropsEvent event)
     {
         for (IEventListener handler : livingDropsEventHandlers)
