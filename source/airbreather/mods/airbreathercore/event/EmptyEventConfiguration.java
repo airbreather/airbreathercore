@@ -1,6 +1,7 @@
 package airbreather.mods.airbreathercore.event;
 
 import java.util.ArrayList;
+
 import cpw.mods.fml.common.eventhandler.IEventListener;
 
 public final class EmptyEventConfiguration implements EventConfiguration

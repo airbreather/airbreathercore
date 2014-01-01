@@ -1,5 +1,7 @@
 package airbreather.mods.airbreathercore.item;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public final class ItemDefinition
 {
     private final int tag;
@@ -9,8 +11,8 @@ public final class ItemDefinition
     public ItemDefinition(int tag, String modID, String itemName)
     {
         this.tag = tag;
-        this.modID = modID;
-        this.itemName = itemName;
+        this.modID = checkNotNull(modID, "modID");
+        this.itemName = checkNotNull(itemName, "itemName");
     }
 
     public int GetTag()

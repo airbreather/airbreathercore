@@ -1,12 +1,17 @@
 package airbreather.mods.airbreathercore.item;
 
 import net.minecraft.item.Item;
-import cpw.mods.fml.common.FMLLog;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ItemRegistrarBase implements ItemRegistrar
 {
     public final void RegisterNewItems(ItemConfiguration configuration, ItemRegistry registry)
     {
+        checkNotNull(configuration, "configuration");
+        checkNotNull(registry, "registry");
+
         for (int tag : configuration.GetNewItemTags())
         {
             ItemDefinition itemDefinition = configuration.GetItemDefinition(tag);
@@ -17,7 +22,9 @@ public class ItemRegistrarBase implements ItemRegistrar
 
     protected Item CreateItemCore(ItemDefinition definition)
     {
-        FMLLog.severe("%d is not a recognized item tag (claims to be for %s:%s).  THIS IS A PROGRAMMING ERROR.",
+        checkNotNull(definition, "definition");
+        checkArgument(false,
+                      "%s is not a recognized item tag (claims to be for %s:%s).",
                       definition.GetTag(),
                       definition.GetModID(),
                       definition.GetItemName());
@@ -26,6 +33,8 @@ public class ItemRegistrarBase implements ItemRegistrar
 
     private Item CreateItem(ItemDefinition itemDefinition)
     {
+        checkNotNull(itemDefinition, "itemDefinition");
+
         Item item = this.CreateItemCore(itemDefinition);
 
         String itemName = itemDefinition.GetItemName();

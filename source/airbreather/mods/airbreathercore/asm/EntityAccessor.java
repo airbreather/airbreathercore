@@ -7,6 +7,8 @@ import com.google.common.base.Optional;
 
 import net.minecraft.entity.Entity;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 // Provides methods that help get at non-public members of Entity.
 public final class EntityAccessor extends AccessorBase
 {
@@ -15,7 +17,7 @@ public final class EntityAccessor extends AccessorBase
 
     public EntityAccessor(Entity entity)
     {
-        this.entity = entity;
+        this.entity = checkNotNull(entity, "entity");
     }
 
     public Optional<Random> GetRand()

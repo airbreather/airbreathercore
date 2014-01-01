@@ -1,5 +1,7 @@
 package airbreather.mods.airbreathercore.recipe;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 // A crafting recipe -- "inputs" come in, ItemStack comes out.
 public final class ShapedCraftingRecipe extends Recipe
 {
@@ -10,7 +12,7 @@ public final class ShapedCraftingRecipe extends Recipe
     public ShapedCraftingRecipe(RecipeResult result, Object... inputs)
     {
         super(RecipeType.ShapedCrafting, result);
-        this.inputs = inputs;
+        this.inputs = checkNotNull(inputs, "inputs");
     }
 
     public Object[] GetInputs()

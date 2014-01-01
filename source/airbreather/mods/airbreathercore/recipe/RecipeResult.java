@@ -2,6 +2,9 @@ package airbreather.mods.airbreathercore.recipe;
 
 import airbreather.mods.airbreathercore.item.ItemDefinition;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 // The output of a recipe.
 public final class RecipeResult
 {
@@ -15,7 +18,8 @@ public final class RecipeResult
 
     public RecipeResult(ItemDefinition itemDefinition, int count)
     {
-        this.itemDefinition = itemDefinition;
+        this.itemDefinition = checkNotNull(itemDefinition, "itemDefinition");
+        checkArgument(count > 0, "count must be greater than zero, not %s", count);
         this.count = count;
     }
 

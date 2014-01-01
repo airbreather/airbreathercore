@@ -1,33 +1,32 @@
 package airbreather.mods.airbreathercore.event;
 
-import java.util.concurrent.CopyOnWriteArrayList;
-import cpw.mods.fml.common.FMLLog;
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Multimaps;
+
 import cpw.mods.fml.common.eventhandler.IEventListener;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 // This whole thing is a thin wrapper around the standard Forge event handling system
 // to minimize the amount I have to think about global variables and state.
 public final class ForgeEventSubscriber implements EventSubscriber
 {
-    // We might get into a situation where we register a new handler at the same time as we're looping through the
-    // existing handlers. It shouldn't happen, but it's easy enough to avoid by using a concurrency-aware collection type,
-    // and the negative performance impact shouldn't be a problem because of the expected number and timing of mutations.
-    private final CopyOnWriteArrayList<IEventListener> livingDropsEventHandlers = new CopyOnWriteArrayList<IEventListener>();
+    private final ListMultimap<EventType, IEventListener> eventListenerMap;
+
+    public ForgeEventSubscriber()
+    {
+        ListMultimap<EventType, IEventListener> map = LinkedListMultimap.create();
+        this.eventListenerMap = Multimaps.synchronizedListMultimap(map);
+    }
 
     public void SubscribeToEvent(EventType eventType, IEventListener handler)
     {
-        switch (eventType)
-        {
-            case LivingDrops:
-                this.livingDropsEventHandlers.add(handler);
-                break;
-
-            default:
-                FMLLog.warning("%s is not a recognized event type.  THIS IS A PROGRAMMING ERROR.", eventType);
-                break;
-        }
+        checkNotNull(handler, "handler");
+        this.eventListenerMap.put(eventType, handler);
     }
 
     public void Initialize()
@@ -38,7 +37,8 @@ public final class ForgeEventSubscriber implements EventSubscriber
     @SubscribeEvent
     public void OnLivingDropsEvent(LivingDropsEvent event)
     {
-        for (IEventListener handler : livingDropsEventHandlers)
+        checkNotNull(event, "event");
+        for (IEventListener handler : eventListenerMap.get(EventType.LivingDrops))
         {
             handler.invoke(event);
         }
