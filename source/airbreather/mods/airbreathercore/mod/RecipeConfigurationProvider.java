@@ -15,7 +15,7 @@ final class RecipeConfigurationProvider implements Provider<RecipeConfiguration>
     @Inject
     public RecipeConfigurationProvider(CustomConfiguration configuration)
     {
-        this.configuration = checkNotNull(configuration);
+        this.configuration = checkNotNull(configuration, "configuration");
     }
 
     @Override

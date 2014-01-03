@@ -1,6 +1,7 @@
 package airbreather.mods.airbreathercore.mod;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Scopes;
 
 import airbreather.mods.airbreathercore.event.EventConfiguration;
 import airbreather.mods.airbreathercore.event.EventSubscriber;
@@ -17,7 +18,7 @@ public class ModuleBase extends AbstractModule
     @Override
     protected void configure()
     {
-        this.bind(EventSubscriber.class).to(ForgeEventSubscriber.class);
+        this.bind(EventSubscriber.class).to(ForgeEventSubscriber.class).in(Scopes.SINGLETON);
         this.bind(RecipeRegistrar.class).to(FmlRecipeRegistrar.class);
         this.bind(ItemRegistry.class).to(FmlItemRegistry.class);
         this.bind(ItemConfiguration.class).toProvider(ItemConfigurationProvider.class);

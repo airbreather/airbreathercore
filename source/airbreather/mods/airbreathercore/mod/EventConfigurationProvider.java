@@ -15,7 +15,7 @@ final class EventConfigurationProvider implements Provider<EventConfiguration>
     @Inject
     public EventConfigurationProvider(CustomConfiguration configuration)
     {
-        this.configuration = checkNotNull(configuration);
+        this.configuration = checkNotNull(configuration, "configuration");
     }
 
     @Override

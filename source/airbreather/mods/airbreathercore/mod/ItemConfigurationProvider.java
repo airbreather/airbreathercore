@@ -15,7 +15,7 @@ final class ItemConfigurationProvider implements Provider<ItemConfiguration>
     @Inject
     public ItemConfigurationProvider(CustomConfiguration configuration)
     {
-        this.configuration = checkNotNull(configuration);
+        this.configuration = checkNotNull(configuration, "configuration");
     }
 
     @Override
