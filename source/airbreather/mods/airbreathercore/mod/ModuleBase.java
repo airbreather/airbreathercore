@@ -1,22 +1,30 @@
 package airbreather.mods.airbreathercore.mod;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Scopes;
-
+import airbreather.mods.airbreathercore.CustomConfiguration;
+import airbreather.mods.airbreathercore.CustomConfigurationBase;
 import airbreather.mods.airbreathercore.event.EventSubscriber;
 import airbreather.mods.airbreathercore.event.ForgeEventSubscriber;
 import airbreather.mods.airbreathercore.item.FmlItemRegistry;
+import airbreather.mods.airbreathercore.item.ItemRegistrar;
+import airbreather.mods.airbreathercore.item.ItemRegistrarBase;
 import airbreather.mods.airbreathercore.item.ItemRegistry;
 import airbreather.mods.airbreathercore.recipe.FmlRecipeRegistrar;
 import airbreather.mods.airbreathercore.recipe.RecipeRegistrar;
 
-public class ModuleBase extends AbstractModule
+public abstract class ModuleBase implements IModule
 {
+    private final EventSubscriber eventSubscriber = new ForgeEventSubscriber();
+
     @Override
-    protected void configure()
-    {
-        this.bind(EventSubscriber.class).to(ForgeEventSubscriber.class).in(Scopes.SINGLETON);
-        this.bind(RecipeRegistrar.class).to(FmlRecipeRegistrar.class);
-        this.bind(ItemRegistry.class).to(FmlItemRegistry.class);
-    }
+    public ItemRegistrar GetItemRegistrar() { return new ItemRegistrarBase(); }
+
+    @Override
+    public CustomConfiguration GetCustomConfiguration() { return new CustomConfigurationBase(); }
+
+    @Override
+    public final EventSubscriber GetEventSubscriber() { return this.eventSubscriber; }
+    @Override
+    public final RecipeRegistrar GetRecipeRegistrar() { return new FmlRecipeRegistrar(); }
+    @Override
+    public final ItemRegistry GetItemRegistry() { return new FmlItemRegistry(); }
 }

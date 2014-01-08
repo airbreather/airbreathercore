@@ -1,9 +1,5 @@
 package airbreather.mods.airbreathercore.mod;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
-
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
@@ -13,11 +9,14 @@ public abstract class ModBase
 {
     private final Main main;
 
-    protected ModBase(Module module)
+    protected ModBase(IModule module)
     {
         checkNotNull(module, "module");
-        Injector injector = Guice.createInjector(module);
-        this.main = injector.getInstance(Main.class);
+        this.main = new Main(module.GetItemRegistry(),
+                             module.GetItemRegistrar(),
+                             module.GetRecipeRegistrar(),
+                             module.GetEventSubscriber(),
+                             module.GetCustomConfiguration());
     }
 
     protected void preInitCore(FMLPreInitializationEvent event)

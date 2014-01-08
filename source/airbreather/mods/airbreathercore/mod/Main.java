@@ -2,8 +2,6 @@ package airbreather.mods.airbreathercore.mod;
 
 import java.io.File;
 
-import com.google.inject.Inject;
-
 import cpw.mods.fml.common.eventhandler.IEventListener;
 
 import airbreather.mods.airbreathercore.CustomConfiguration;
@@ -27,7 +25,6 @@ final class Main
     private final EventSubscriber eventSubscriber;
     private final CustomConfiguration configuration;
 
-    @Inject
     public Main(final ItemRegistry itemRegistry,
                 final ItemRegistrar itemRegistrar,
                 final RecipeRegistrar recipeRegistrar,
