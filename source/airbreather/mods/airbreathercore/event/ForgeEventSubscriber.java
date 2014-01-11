@@ -23,12 +23,14 @@ public final class ForgeEventSubscriber implements EventSubscriber
         this.eventListenerMap = Multimaps.synchronizedListMultimap(map);
     }
 
+    @Override
     public void SubscribeToEvent(EventType eventType, IEventListener handler)
     {
         checkNotNull(handler, "handler");
         this.eventListenerMap.put(eventType, handler);
     }
 
+    @Override
     public void Initialize()
     {
         MinecraftForge.EVENT_BUS.register(this);

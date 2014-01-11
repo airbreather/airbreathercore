@@ -31,4 +31,3 @@ Things I'm not particularly proud of that are my fault:
 
 1. Handlers for new event types will require changes here.
 1. Registration for new kinds of recipes will require changes here.
-1. The system of "item tags" is more-or-less pointless as of 1.7.

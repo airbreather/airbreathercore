@@ -34,11 +34,7 @@ public abstract class LivingDropsEventHandlerBase implements IEventListener
         this.maxDropsPerEvent = maxDropsPerEvent;
     }
 
-    public EventType GetEventType()
-    {
-        return EventType.LivingDrops;
-    }
-
+    @Override
     public void invoke(Event event)
     {
         checkNotNull(event, "event");

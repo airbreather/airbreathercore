@@ -12,9 +12,8 @@ public class ItemRegistrarBase implements ItemRegistrar
         checkNotNull(configuration, "configuration");
         checkNotNull(registry, "registry");
 
-        for (int tag : configuration.GetNewItemTags())
+        for (ItemDefinition itemDefinition : configuration.GetItemDefinitionsForNewItems())
         {
-            ItemDefinition itemDefinition = configuration.GetItemDefinition(tag);
             Item item = this.CreateItem(itemDefinition);
             registry.RegisterNewItem(itemDefinition, item);
         }
@@ -23,11 +22,7 @@ public class ItemRegistrarBase implements ItemRegistrar
     protected Item CreateItemCore(ItemDefinition definition)
     {
         checkNotNull(definition, "definition");
-        checkArgument(false,
-                      "%s is not a recognized item tag (claims to be for %s:%s).",
-                      definition.GetTag(),
-                      definition.GetModID(),
-                      definition.GetItemName());
+        checkArgument(false, "%s is not a recognized item definition.", definition);
         return null;
     }
 

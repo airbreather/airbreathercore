@@ -1,16 +1,12 @@
 package airbreather.mods.airbreathercore.item;
 
-import java.util.ArrayList;
+import com.google.common.collect.ImmutableList;
 
 public final class EmptyItemConfiguration implements ItemConfiguration
 {
-    public Iterable<Integer> GetNewItemTags()
+    @Override
+    public Iterable<ItemDefinition> GetItemDefinitionsForNewItems()
     {
-        return new ArrayList<Integer>(0);
-    }
-
-    public ItemDefinition GetItemDefinition(int tag)
-    {
-        return null;
+        return ImmutableList.of();
     }
 }
