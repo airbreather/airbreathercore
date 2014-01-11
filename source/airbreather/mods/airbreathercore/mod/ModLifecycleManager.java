@@ -1,7 +1,8 @@
 package airbreather.mods.airbreathercore.mod;
 
-import java.io.File;
-
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.IEventListener;
 
 import airbreather.mods.airbreathercore.CustomConfiguration;
@@ -16,7 +17,9 @@ import airbreather.mods.airbreathercore.recipe.RecipeRegistrar;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-final class Main
+// Performs all the standard mod registration stuff needed
+// during pre-init, init, and post-init.
+public final class ModLifecycleManager implements IModLifecycleManager
 {
     // The dependencies used to delegate specific mod responsibilities.
     private final ItemRegistry itemRegistry;
@@ -25,36 +28,33 @@ final class Main
     private final EventSubscriber eventSubscriber;
     private final CustomConfiguration configuration;
 
-    public Main(final ItemRegistry itemRegistry,
-                final ItemRegistrar itemRegistrar,
-                final RecipeRegistrar recipeRegistrar,
-                final EventSubscriber eventSubscriber,
-                final CustomConfiguration configuration)
+    public ModLifecycleManager(IModule module)
     {
-        this.itemRegistry = checkNotNull(itemRegistry, "itemRegistry");
-        this.itemRegistrar = checkNotNull(itemRegistrar, "itemRegistrar");
-        this.recipeRegistrar = checkNotNull(recipeRegistrar, "recipeRegistrar");
-        this.eventSubscriber = checkNotNull(eventSubscriber, "eventSubscriber");
-        this.configuration = checkNotNull(configuration, "configuration");
+        checkNotNull(module, "module");
+
+        this.itemRegistry = module.GetItemRegistry();
+        this.itemRegistrar = module.GetItemRegistrar();
+        this.recipeRegistrar = module.GetRecipeRegistrar();
+        this.eventSubscriber = module.GetEventSubscriber();
+        this.configuration = module.GetCustomConfiguration();
     }
 
-    public void preInit(File configurationFile)
+    @Override
+    public void OnPreInit(FMLPreInitializationEvent event)
     {
-        checkNotNull(configurationFile, "configurationFile");
-        this.configuration.Initialize(configurationFile);
+        checkNotNull(event, "event");
+        this.configuration.Initialize(event.getSuggestedConfigurationFile());
 
         ItemConfiguration itemConfiguration = this.configuration.GetItemConfiguration();
         this.itemRegistrar.RegisterNewItems(itemConfiguration, this.itemRegistry);
     }
 
-    public void postInit()
+    @Override
+    public void OnInit(FMLInitializationEvent event)
     {
-        // Register all the recipes.
-        // This MUST be called during post-initialization, or else FmlItemRegistry won't have any items yet.
-        RecipeConfiguration recipeConfiguration = this.configuration.GetRecipeConfiguration();
-        this.recipeRegistrar.RegisterRecipes(recipeConfiguration, this.itemRegistry);
+        checkNotNull(event, "event");
 
-        // Now register all the event handlers, particularly those for mob drop events.
+        // Register all the event handlers.
         this.eventSubscriber.Initialize();
         EventConfiguration eventConfiguration = this.configuration.GetEventConfiguration();
         for (EventType eventType : eventConfiguration.GetRecognizedEventTypes())
@@ -64,5 +64,15 @@ final class Main
                 this.eventSubscriber.SubscribeToEvent(eventType, handler);
             }
         }
+    }
+
+    @Override
+    public void OnPostInit(FMLPostInitializationEvent event)
+    {
+        checkNotNull(event, "event");
+        // Register all the recipes.
+        // This MUST be called during post-initialization, or else FmlItemRegistry won't have any items yet.
+        RecipeConfiguration recipeConfiguration = this.configuration.GetRecipeConfiguration();
+        this.recipeRegistrar.RegisterRecipes(recipeConfiguration, this.itemRegistry);
     }
 }

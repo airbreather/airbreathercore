@@ -11,6 +11,7 @@ import airbreather.mods.airbreathercore.item.ItemRegistry;
 import airbreather.mods.airbreathercore.recipe.FmlRecipeRegistrar;
 import airbreather.mods.airbreathercore.recipe.RecipeRegistrar;
 
+// A base class for what the majority of IModule implementations will be.
 public abstract class ModuleBase implements IModule
 {
     private final EventSubscriber eventSubscriber = new ForgeEventSubscriber();
