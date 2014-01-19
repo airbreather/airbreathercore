@@ -4,5 +4,6 @@ package airbreather.mods.airbreathercore.recipe;
 public enum RecipeType
 {
     ShapedCrafting,
-    Smelting
+    Smelting,
+    ShapelessCrafting
 }
