@@ -1,4 +1,5 @@
 package airbreather.mods.airbreathercore.recipe;
+import com.google.common.collect.ImmutableList;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,6 +30,10 @@ public final class FmlRecipeRegistrar implements RecipeRegistrar
 
                 case ShapedCrafting:
                     RegisterShapedCraftingRecipe(recipe, itemRegistry);
+                    break;
+
+                case ShapelessCrafting:
+                    RegisterShapelessCraftingRecipe(recipe, itemRegistry);
                     break;
             }
         }
@@ -81,6 +86,31 @@ public final class FmlRecipeRegistrar implements RecipeRegistrar
         ItemStack resultItemStack = GetResultItemStack(result, itemRegistry);
 
         GameRegistry.addRecipe(resultItemStack, inputs);
+    }
+
+    private static void RegisterShapelessCraftingRecipe(Recipe recipe, ItemRegistry itemRegistry)
+    {
+        checkArgument(recipe instanceof ShapelessCraftingRecipe,
+                      "recipe must be a ShapelessCraftingRecipe, not %s, if GetRecipeType() returns ShapelessCrafting.",
+                      recipe.getClass());
+
+        ShapelessCraftingRecipe shapelessCraftingRecipe = (ShapelessCraftingRecipe)recipe;
+
+        ImmutableList<ItemDefinition> inputDefinitions = shapelessCraftingRecipe.GetInputs();
+
+        // Gotta convert ItemDefinition to their Item.
+        Object[] inputs = new Object[inputDefinitions.size()];
+        for (int i = 0; i < inputDefinitions.size(); i++)
+        {
+            ItemDefinition definition = inputDefinitions.get(i);
+            Item item = itemRegistry.FetchItem(definition);
+            inputs[i] = item;
+        }
+
+        RecipeResult result = shapelessCraftingRecipe.GetResult();
+        ItemStack resultItemStack = GetResultItemStack(result, itemRegistry);
+
+        GameRegistry.addShapelessRecipe(resultItemStack, inputs);
     }
 
     private static ItemStack GetResultItemStack(RecipeResult result, ItemRegistry itemRegistry)
