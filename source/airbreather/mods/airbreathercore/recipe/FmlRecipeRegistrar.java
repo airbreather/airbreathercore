@@ -78,10 +78,6 @@ public final class FmlRecipeRegistrar implements RecipeRegistrar
 
     private static void RegisterShapelessCraftingRecipe(Recipe recipe, ItemRegistry itemRegistry)
     {
-        checkArgument(recipe instanceof ShapelessCraftingRecipe,
-                      "recipe must be a ShapelessCraftingRecipe, not %s, if GetRecipeType() returns ShapelessCrafting.",
-                      recipe.getClass());
-
         ShapelessCraftingRecipe shapelessCraftingRecipe = (ShapelessCraftingRecipe)recipe;
 
         ImmutableList<ItemDefinition> inputDefinitions = shapelessCraftingRecipe.GetInputs();
