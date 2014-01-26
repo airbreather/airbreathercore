@@ -10,7 +10,7 @@ import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.IEventListener;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
-import airbreather.mods.airbreathercore.asm.EntityAccessor;
+import airbreather.mods.airbreathercore.reflect.EntityAccessor;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
