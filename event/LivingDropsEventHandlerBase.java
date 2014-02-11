@@ -73,7 +73,7 @@ public abstract class LivingDropsEventHandlerBase implements IEventListener
         {
             // For some reason (guessing it's to avoid dropping a 0-item stack),
             // the vanilla code loops through and drops multiple 1-item stacks.
-            EntityItem droppedItem = typedEvent.entity.func_145779_a(itemToDrop.get(), 1);
+            EntityItem droppedItem = typedEvent.entity.dropItem(itemToDrop.get(), 1);
 
             // from browsing the code (and testing it out), it looks like the
             // result will already get added to "drops" as a result of calling
