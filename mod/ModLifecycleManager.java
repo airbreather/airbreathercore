@@ -45,14 +45,14 @@ public final class ModLifecycleManager implements IModLifecycleManager
         checkNotNull(event, "event");
         this.configuration.Initialize(event.getSuggestedConfigurationFile());
 
+        // Register all the new items
+        // (do this before registering the things that may depend on them)
         ItemConfiguration itemConfiguration = this.configuration.GetItemConfiguration();
         this.itemRegistrar.RegisterNewItems(itemConfiguration, this.itemRegistry);
-    }
 
-    @Override
-    public void OnInit(FMLInitializationEvent event)
-    {
-        checkNotNull(event, "event");
+        // Register all the recipes.
+        RecipeConfiguration recipeConfiguration = this.configuration.GetRecipeConfiguration();
+        this.recipeRegistrar.RegisterRecipes(recipeConfiguration, this.itemRegistry);
 
         // Register all the event handlers.
         this.eventSubscriber.Initialize();
@@ -67,12 +67,14 @@ public final class ModLifecycleManager implements IModLifecycleManager
     }
 
     @Override
+    public void OnInit(FMLInitializationEvent event)
+    {
+        checkNotNull(event, "event");
+    }
+
+    @Override
     public void OnPostInit(FMLPostInitializationEvent event)
     {
         checkNotNull(event, "event");
-        // Register all the recipes.
-        // This MUST be called during post-initialization, or else FmlItemRegistry won't have any items yet.
-        RecipeConfiguration recipeConfiguration = this.configuration.GetRecipeConfiguration();
-        this.recipeRegistrar.RegisterRecipes(recipeConfiguration, this.itemRegistry);
     }
 }
