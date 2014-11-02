@@ -4,5 +4,11 @@ package airbreather.mods.airbreathercore.event;
 public enum EventType
 {
     // An entity has died and is being considered for item drops.
-    LivingDrops
+    LivingDrops,
+
+    // An entity is being updated this tick.
+    LivingUpdate,
+
+    // An entity is being constructed.
+    EntityConstructing
 }

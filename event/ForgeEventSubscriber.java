@@ -7,7 +7,9 @@ import com.google.common.collect.Multimaps;
 import cpw.mods.fml.common.eventhandler.IEventListener;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -41,6 +43,26 @@ public final class ForgeEventSubscriber implements EventSubscriber
     {
         checkNotNull(event, "event");
         for (IEventListener handler : eventListenerMap.get(EventType.LivingDrops))
+        {
+            handler.invoke(event);
+        }
+    }
+
+    @SubscribeEvent
+    public void OnLivingUpdateEvent(LivingUpdateEvent event)
+    {
+        checkNotNull(event, "event");
+        for (IEventListener handler : eventListenerMap.get(EventType.LivingUpdate))
+        {
+            handler.invoke(event);
+        }
+    }
+
+    @SubscribeEvent
+    public void OnEntityConstructingEvent(EntityConstructing event)
+    {
+        checkNotNull(event, "event");
+        for (IEventListener handler : eventListenerMap.get(EventType.EntityConstructing))
         {
             handler.invoke(event);
         }
