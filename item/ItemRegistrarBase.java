@@ -33,13 +33,7 @@ public class ItemRegistrarBase implements ItemRegistrar
         Item item = this.CreateItemCore(itemDefinition);
 
         String itemName = itemDefinition.GetItemName();
-        String modID = itemDefinition.GetModID();
-
-        // This is what I always set them to anyway,
-        // so I refuse to sprinkle them all over the code.
         item.setUnlocalizedName(itemName);
-        String textureName = String.format("%s:%s", modID, itemName);
-        item.setTextureName(textureName);
 
         return item;
     }

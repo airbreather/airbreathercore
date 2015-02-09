@@ -6,8 +6,8 @@ import com.google.common.base.Optional;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.IEventListener;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.IEventListener;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
 import airbreather.mods.airbreathercore.reflect.EntityAccessor;

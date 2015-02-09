@@ -1,6 +1,6 @@
 package airbreather.mods.airbreathercore.event;
 
-import cpw.mods.fml.common.eventhandler.IEventListener;
+import net.minecraftforge.fml.common.eventhandler.IEventListener;
 
 // An interface for a configuration that holds the event handlers configured to use for this mod.
 public interface EventConfiguration

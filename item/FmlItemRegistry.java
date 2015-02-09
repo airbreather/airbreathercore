@@ -1,7 +1,7 @@
 package airbreather.mods.airbreathercore.item;
 
 import net.minecraft.item.Item;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

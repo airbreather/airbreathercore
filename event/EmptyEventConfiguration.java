@@ -2,7 +2,7 @@ package airbreather.mods.airbreathercore.event;
 
 import com.google.common.collect.ImmutableList;
 
-import cpw.mods.fml.common.eventhandler.IEventListener;
+import net.minecraftforge.fml.common.eventhandler.IEventListener;
 
 public final class EmptyEventConfiguration implements EventConfiguration
 {
