@@ -27,6 +27,6 @@ public final class FmlItemRegistry implements ItemRegistry
         String modID = itemDefinition.GetModID();
         String itemName = itemDefinition.GetItemName();
 
-        GameRegistry.registerItem(item, itemName, modID);
+        GameRegistry.registerItem(item, itemName);
     }
 }
