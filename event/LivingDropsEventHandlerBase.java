@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.google.common.base.Optional;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -56,16 +57,18 @@ public abstract class LivingDropsEventHandlerBase implements IEventListener
         // Start off by selecting a random number from [min, max] of items.
         // Random.nextInt(n) returns [0, n), so we need to do a bit of fiddling
         // to get what we need.
-        EntityAccessor entityAccessor = new EntityAccessor(typedEvent.entity);
+        Entity entity = typedEvent.getEntity();
+        EntityAccessor entityAccessor = new EntityAccessor(entity);
         Random rand = entityAccessor.GetRand().or(this.rand);
 
         int range = this.maxDropsPerEvent - this.minDropsPerEvent + 1;
         int dropCount = this.minDropsPerEvent + rand.nextInt(range);
 
         // ... and then add between 0 and (LOOTING LEVEL) more!
-        if (typedEvent.lootingLevel > 0)
+        int lootingLevel = typedEvent.getLootingLevel();
+        if (lootingLevel > 0)
         {
-            int perkBonus = rand.nextInt(typedEvent.lootingLevel + 1);
+            int perkBonus = rand.nextInt(lootingLevel + 1);
             dropCount += perkBonus;
         }
 
@@ -73,7 +76,7 @@ public abstract class LivingDropsEventHandlerBase implements IEventListener
         {
             // For some reason (guessing it's to avoid dropping a 0-item stack),
             // the vanilla code loops through and drops multiple 1-item stacks.
-            EntityItem droppedItem = typedEvent.entity.dropItem(itemToDrop.get(), 1);
+            EntityItem droppedItem = entity.dropItem(itemToDrop.get(), 1);
 
             // from browsing the code (and testing it out), it looks like the
             // result will already get added to "drops" as a result of calling
