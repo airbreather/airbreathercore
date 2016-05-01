@@ -1,6 +1,6 @@
 package airbreather.mods.airbreathercore.event;
 
-import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimaps;
 
@@ -21,15 +21,17 @@ public final class ForgeEventSubscriber implements EventSubscriber
 
     public ForgeEventSubscriber()
     {
-        ListMultimap<EventType, IEventListener> map = LinkedListMultimap.create();
-        this.eventListenerMap = Multimaps.synchronizedListMultimap(map);
+        this.eventListenerMap = ArrayListMultimap.create();
     }
 
     @Override
     public void SubscribeToEvent(EventType eventType, IEventListener handler)
     {
         checkNotNull(handler, "handler");
-        this.eventListenerMap.put(eventType, handler);
+        synchronized(this.eventListenerMap)
+        {
+            this.eventListenerMap.put(eventType, handler);
+        }
     }
 
     @Override
