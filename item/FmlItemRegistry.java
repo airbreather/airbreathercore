@@ -1,6 +1,7 @@
 package airbreather.mods.airbreathercore.item;
 
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -15,7 +16,7 @@ public final class FmlItemRegistry implements ItemRegistry
 
         String modID = itemDefinition.GetModID();
         String itemName = itemDefinition.GetItemName();
-        return GameRegistry.findItem(modID, itemName);
+        return Item.REGISTRY.getObject(new ResourceLocation(modID, itemName));
     }
 
     // Registers the given definition to map to the given Item.
@@ -27,6 +28,6 @@ public final class FmlItemRegistry implements ItemRegistry
         String modID = itemDefinition.GetModID();
         String itemName = itemDefinition.GetItemName();
 
-        GameRegistry.registerItem(item, itemName);
+        GameRegistry.register(item.setRegistryName(modID, itemName));
     }
 }
