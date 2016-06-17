@@ -14,8 +14,19 @@ public class ItemRegistrarBase implements ItemRegistrar
 
         for (ItemDefinition itemDefinition : configuration.GetItemDefinitionsForNewItems())
         {
+            if (itemDefinition == null)
+            {
+                continue;
+            }
+
             Item item = this.CreateItem(itemDefinition);
+            if (item == null)
+            {
+                continue;
+            }
+
             registry.RegisterNewItem(itemDefinition, item);
+            this.AfterItemRegistered(itemDefinition, item, registry);
         }
     }
 
@@ -25,6 +36,8 @@ public class ItemRegistrarBase implements ItemRegistrar
         checkArgument(false, "%s is not a recognized item definition.", definition);
         return null;
     }
+
+    protected void AfterItemRegistered(ItemDefinition definition, Item item, ItemRegistry registry) { }
 
     private Item CreateItem(ItemDefinition itemDefinition)
     {
