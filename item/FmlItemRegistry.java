@@ -16,7 +16,7 @@ public final class FmlItemRegistry implements ItemRegistry
 
         String modID = itemDefinition.GetModID();
         String itemName = itemDefinition.GetItemName();
-        return Item.REGISTRY.getObject(new ResourceLocation(modID, itemName));
+        return Item.REGISTRY.getObject(new ResourceLocation(modID.toLowerCase(), itemName));
     }
 
     // Registers the given definition to map to the given Item.
@@ -28,6 +28,6 @@ public final class FmlItemRegistry implements ItemRegistry
         String modID = itemDefinition.GetModID();
         String itemName = itemDefinition.GetItemName();
 
-        GameRegistry.register(item.setRegistryName(modID, itemName));
+        GameRegistry.register(item.setRegistryName(modID.toLowerCase(), itemName));
     }
 }
