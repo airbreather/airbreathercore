@@ -121,7 +121,7 @@ public final class FmlRecipeRegistrar implements RecipeRegistrar
         ItemStack resultItemStack = new ItemStack(resultItem);
         int requestedStackSize = Math.max(1, result.GetCount());
 
-        resultItemStack.stackSize = Math.min(requestedStackSize, resultItemStack.getMaxStackSize());
+        resultItemStack.func_190920_e(Math.min(requestedStackSize, resultItemStack.getMaxStackSize()));
         return resultItemStack;
     }
 }
